@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using EmployeeAPI.Models;
+using System.Drawing;
 
 namespace EmployeeAPI.Controllers
 {
@@ -19,11 +20,15 @@ namespace EmployeeAPI.Controllers
         }
 
         // GET: Employees
-        public async Task<IActionResult> Index()
+        [HttpGet]
+        public IActionResult Index()
         {
-              return _context.Employees != null ? 
-                          View(await _context.Employees.ToListAsync()) :
-                          Problem("Entity set 'EmployeeContext.Employees'  is null.");
+            var query = from e in _context.Employees
+                        join ep in _context.EmployeePositions
+                          on e.EmpID equals ep.EmpID
+                        select new { e, ep };
+
+            return Ok(query.ToList());
         }
 
         // GET: Employees/Details/5

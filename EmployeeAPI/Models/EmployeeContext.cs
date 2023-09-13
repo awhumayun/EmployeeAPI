@@ -9,7 +9,7 @@ namespace EmployeeAPI.Models
         public EmployeeContext(IConfiguration configuration) =>
             Configuration = configuration;
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder.UseNpgsql("Host=my_host;Database=my_db;Username=my_user;Password=my_pw");
+            => optionsBuilder.UseNpgsql("Host=localhost;Database=EmployeeDB;Username=postgres;Password=kyG=7-9w");
 
         public DbSet<Employee> Employees { get; set; }
         public DbSet<EmployeePosition> EmployeePositions { get; set; }

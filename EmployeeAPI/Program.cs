@@ -27,6 +27,8 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.MapControllers();
+app.MapControllerRoute(
+    name: "Employees",
+    pattern: "{controller=Employees}/{action=Index}/{id?}");
 
 app.Run();
